@@ -1,16 +1,21 @@
 #Number guessing game
 
 from random import randint
+from math import ceil, log
 
-real_num = randint(1,100)
-
-tries = 5
 attempts = 0
 game_state = 'play'
 score = 0
 victory = False
 
 while True:
+    lower_bound = int(input('Enter lower bound: '))
+    upper_bound = int(input('Enter upper bound: '))
+
+    real_num = randint(lower_bound, upper_bound)
+
+    tries = ceil((log(upper_bound - lower_bound + 1, 2)))
+    print(tries)
 
     if(game_state == 'end'):
         break
@@ -71,7 +76,12 @@ while True:
             print('--------------------------------')
             print('--------------------------------')
             game_state = 'play'
-            real_num = randint(1,100)
+            
+            change_bounds = input("Do you want to change the range? (yes/no): ")
+            if(change_bounds.lower() == 'yes'):
+                real_num = randint(lower_bound, upper_bound)
+            elif(change_bounds.lower() == 'no'):
+                pass
             attempts = 0
             
 
